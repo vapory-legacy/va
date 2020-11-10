@@ -1,0 +1,184 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `fe` crate."><meta name="keywords" content="rust, rustlang, rust-lang, fe"><title>fe - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../ayu.css" disabled ><script src="../storage.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="alternate icon" type="image/png" href="../favicon-16x16.png">
+<link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../fe/index.html'><div class='logo-container rust-logo'><img src='../rust-logo.png' alt='logo'></div></a><p class="location">Crate fe</p><div class="block version"><p>Version 0.1.0</p></div><div class="sidebar-elems"><a id="all-types" href="all.html"><p>See all fe's items</p></a><div class="block items"><ul><li><a href="#functions">Functions</a></li></ul></div><p class="location"></p><script>window.sidebarCurrent = {name: "fe", ty: "mod", relpath: "../"};</script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../src/fe/main.rs.html#1-17" title="goto source code">[src]</a></span><span class="in-band">Crate <a class="mod" href="">fe</a></span></h1><div class="docblock"><img src="https://raw.githubusercontent.com/ethereum/fe/master/logo/fe_svg/fe_source.svg" width="150px">
+<p>Fe is an emerging smart contract language for the Ethereum blockchain.</p>
+<p><a href="https://github.com/ethereum/fe/actions"><img src="https://github.com/ethereum/fe/workflows/CI/badge.svg" alt="Build Status" /></a>
+<a href="https://codecov.io/gh/ethereum/fe"><img src="https://codecov.io/gh/ethereum/fe/branch/master/graph/badge.svg" alt="Coverage" /></a></p>
+<h2 id="getting-started" class="section-header"><a href="#getting-started">Getting started</a></h2>
+<ul>
+<li><a href="https://github.com/ethereum/fe/blob/master/docs/build.md">Build the compiler</a></li>
+</ul>
+<h2 id="overview" class="section-header"><a href="#overview">Overview</a></h2>
+<p>Fe is inspired by Vyper and aims to achieve the goals of the <a href="https://github.com/vyperlang/vyper">existing Vyper
+project</a> along with the following
+additional goals:</p>
+<ul>
+<li>Emphasis on correct implementation via use of better tooling, application of
+formal methods, and stricter development practices</li>
+<li>A complete language specification to aid in verification of compiler
+correctness</li>
+<li>Support for both eWASM and EVM code generation via use of the <a href="https://solidity.readthedocs.io/en/v0.5.13/yul.html">YUL IR
+format</a></li>
+<li>Implementation in a powerful, systems-oriented language (Rust) with strong
+safety guarantees</li>
+<li>Syntactic improvements and additional code re-use features</li>
+<li>Statically built compiler binaries for smoother installation process</li>
+<li>WASM compiler binaries for enhanced portability and in-browser compilation of
+Fe contracts</li>
+</ul>
+<h2 id="inherited-goals" class="section-header"><a href="#inherited-goals">Inherited goals</a></h2>
+<p>Fe aims to achieve most of the goals of the <a href="https://github.com/vyperlang/vyper">existing Vyper
+project</a>.  Those goals are <a href="https://vyper.readthedocs.io/en/latest/index.html#principles-and-goals">described in
+that project's
+documentation</a>
+though we include a summary of them here:</p>
+<ul>
+<li>Bounds and overflow checking</li>
+<li>Decidability by limitation of dynamic program behavior</li>
+<li>More precise gas estimation (as a consequence of decidability)</li>
+<li>Static typing</li>
+<li>Pure function support</li>
+<li>Binary fixed-point math</li>
+<li>Restrictions on reentrancy</li>
+<li>Static looping</li>
+</ul>
+<p>The following is a list of goals or aspects of the existing Vyper project that
+we <em>do not necessarily</em> wish to duplicate:</p>
+<ul>
+<li>Lack of code re-use features such as:
+<ul>
+<li>Modifiers (re-usable assertions)</li>
+<li>Method resolution and class inheritance (though we're on the fence about
+this)</li>
+<li>Module imports</li>
+</ul>
+</li>
+<li>Strict enforcement of limits on dynamic behavior -- Though we aim to provide
+Vyper's decidability by default, we believe it may also be useful to allow
+disabling of decidability features if the expressivity trade-off doesn't make
+sense for certain projects.</li>
+</ul>
+<h2 id="additional-goals" class="section-header"><a href="#additional-goals">Additional goals</a></h2><h3 id="stricter-development-practices" class="section-header"><a href="#stricter-development-practices">Stricter development practices</a></h3>
+<p>We wish to promote the following development practices:</p>
+<ul>
+<li>Thorough unit testing of <em>all</em> compiler components, from lexing and parsing
+routines to type checking and compilation routines.</li>
+<li>Thorough integration testing of combined components to identify issues with
+abstraction boundaries.</li>
+<li>Property-based testing or fuzz testing of components where appropriate.  For
+examples of property-based testing frameworks, see <a href="https://github.com/BurntSushi/quickcheck">QuickCheck for
+Rust</a>, <a href="https://github.com/nick8325/quickcheck">QuickCheck for
+Haskell</a>, and
+<a href="https://hypothesis.works/">hypothesis</a>.</li>
+<li>The above testing goals should, at a minimum, give 100% code coverage but
+should also redundantly test the same code sections in different modes of
+use.</li>
+<li>Separation of concerns -- Components responsible for different stages of
+compilation (parsing, type checking, compilation, etc.) should be clearly
+separated into different libraries with distinct APIs.</li>
+<li>Maintainability -- Code should be written with future contributors in mind.
+Complex features should not only be automatically tested but also described
+in developer documentation.  Code should be DRY and should include
+abstractions that naturally encapsulate specific tasks.</li>
+</ul>
+<h3 id="support-for-ewasm-and-evm-and-the-use-of-yul" class="section-header"><a href="#support-for-ewasm-and-evm-and-the-use-of-yul">Support for eWASM and EVM and the use of YUL</a></h3>
+<p>We wish to leverage the YUL IR format as a means of targeting both the eWASM
+and EVM platforms.  YUL is actively developed by the Solidity community and we
+see a great opportunity for synergy with the Solidity project through shared
+use of YUL.</p>
+<h3 id="use-of-rust-as-an-implementation-language" class="section-header"><a href="#use-of-rust-as-an-implementation-language">Use of Rust as an implementation language</a></h3>
+<p>The Rust programming language has been a rising star in the PL community for a
+number of years.  We believe it provides a reasonable balance between the
+following factors:</p>
+<ul>
+<li>Type and memory safety</li>
+<li>Ease of use</li>
+<li>Expressivity</li>
+<li>Size and quality of developer community</li>
+<li>Availability of modern language idioms such as iterators, functional
+programming features, etc.</li>
+<li>Support from established organizations such as Mozilla</li>
+</ul>
+<p>The Rust project and Mozilla foundation are also some of the primary drivers
+behind the WASM project, which will likely end up playing a central role in the
+Ethereum community.  The Rust compiler is one of the premier compilers to
+target the WASM platform.</p>
+<p>The use of a compiled language in general, and Rust in particular, will
+facilitate improvements in the compiler release process.  New compiler versions
+could be offered as statically compiled binaries (removing dependence on
+existing Python binaries) or as WASM binaries (opening up the possibility to
+run Fe in-browser or, in the distant future, on-chain).</p>
+<h3 id="language-specification-and-formal-methods" class="section-header"><a href="#language-specification-and-formal-methods">Language specification and formal methods</a></h3>
+<p>We wish to provide a complete language specification with the following parts:</p>
+<ul>
+<li>Syntax specification in extended BNF format similar to the <a href="https://docs.python.org/3/reference/grammar.html">Python grammar
+specification</a>.</li>
+<li>An <a href="https://en.wikipedia.org/wiki/Operational_semantics#Small-step_semantics">operational, small-step
+semantics</a>
+to describe correct program evaluation and behavior.</li>
+<li>Sections of informal prose to aid in understanding of the grammar, semantics,
+their relationship, and the context in which they operate.</li>
+</ul>
+<p>A work in progress draft of the specification can be found <a href="https://github.com/ethereum/fe/blob/master/spec/index.md">here</a>.</p>
+<p>A secondary goal to providing a specification document could be to also provide
+an executable specification via tools such as the <a href="http://www.kframework.org/index.php/Main_Page">K
+framework</a>.  Providing such an
+executable specification may become a primary goal if it can be achieved
+without too much effort and without hampering the achievement of other goals.</p>
+<p>Through the application of rigorous development practices and the availability
+of a complete language specification, we hope to apply formal verification
+methods to the Fe compiler and also to programs generated by it.</p>
+<h2 id="progress-and-roadmap" class="section-header"><a href="#progress-and-roadmap">Progress and roadmap</a></h2>
+<p>Development of Fe is currently in its early stages.  Here's a rough
+overview of recently completed work as well as some short and long-term goals.
+None of these lists should be considered exhaustive and should also not be
+considered to represent the exact prioritization of work items.</p>
+<h3 id="recently-achieved-goals" class="section-header"><a href="#recently-achieved-goals">Recently achieved goals</a></h3>
+<ul>
+<li>[x] Completed port of <a href="https://github.com/python/cpython/blob/2a58b0636d1f620f8a85a2e4c030cc10551936a5/Lib/tokenize.py">python's stdlib <code>tokenize</code>
+module</a>
+to Rust</li>
+<li>[x] Settled on overall design of parser</li>
+<li>[x] Completed a few basic parsers</li>
+<li>[x] All code is now tested on both native and WASM platforms with WASM
+testing via node.js</li>
+<li>[x] Achieve ~100% code coverage by tests.  Coverage is currently maximized at
+~99% due to some code paths being unreachable and our coverage tool currently
+having no support for ignoring specific lines of code.</li>
+<li>[x] Identify an appropriate subset of the Python grammar and any grammatical
+extensions needed to define a Fe EBNF grammar
+<ul>
+<li>Eliminate certain Pythonic grammatical elements that don't apply to Fe
+(such as <code>async</code> constructs, <code>lambda</code> expressions, argument packing syntax
+like <code>*args</code> and <code>**kwargs</code>, etc.)</li>
+<li>Include grammatical elements that more directly capture Fe language
+constructs (such as event, contract, or interface definitions, type
+dimensions, etc.)</li>
+</ul>
+</li>
+<li>[x] Finish writing parsers for the Fe EBNF grammar</li>
+<li>[x] Parse a basic greeter contract to AST</li>
+<li>[x] Compile the AST of a basic guest book contract to YUL</li>
+<li>[x] Generate YUL source code from YUL AST objects (via <a href="https://github.com/axic/yultsur/">yultsur</a>)</li>
+<li>[x] Invoke the Solidity compiler with generated YUL source to produce a
+compiled binary (via <a href="https://github.com/axic/solc-rust">solc-rust</a>)</li>
+</ul>
+<h3 id="short-term-goals" class="section-header"><a href="#short-term-goals">Short-term goals</a></h3>
+<ul>
+<li>[ ] Implement an <a href="https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol">ERC20 token contract</a> in Fe and compile it.</li>
+</ul>
+<h3 id="long-term-goals" class="section-header"><a href="#long-term-goals">Long-term goals</a></h3>
+<ul>
+<li>Implement compilation routines for the full set of current Fe features</li>
+<li>Implement a YUL compiler in Rust to eliminate the need to interact with the
+Solidity compiler</li>
+<li>Formally verify the Fe compiler using the language specification</li>
+</ul>
+<h2 id="community" class="section-header"><a href="#community">Community</a></h2>
+<ul>
+<li>Twitter: <a href="https://twitter.com/official_fe">@official_fe</a></li>
+<li>Chat: <a href="http://gitter.im/ethereum/fe">gitter/ethereum/fe</a></li>
+</ul>
+</div><h2 id="functions" class="section-header"><a href="#functions">Functions</a></h2>
+<table><tr class="module-item"><td><a class="fn" href="fn.main.html" title="fe::main fn">main</a></td><td class="docblock-short"></td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../";window.currentCrate = "fe";</script><script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>

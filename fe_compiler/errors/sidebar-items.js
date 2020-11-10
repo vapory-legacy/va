@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["ErrorKind","Errors can either be an object or static reference."]],"struct":[["CompileError","List of errors encountered during compilation."]]});

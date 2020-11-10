@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `builders` mod in crate `fe_parser`."><meta name="keywords" content="rust, rustlang, rust-lang, builders"><title>fe_parser::builders - Rust</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="alternate icon" type="image/png" href="../../favicon-16x16.png">
+<link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../fe_parser/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a><p class="location">Module builders</p><div class="sidebar-elems"><div class="block items"><ul><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li></ul></div><p class="location"><a href="../index.html">fe_parser</a></p><script>window.sidebarCurrent = {name: "builders", ty: "mod", relpath: "../"};</script><script defer src="../sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../../src/fe_parser/builders.rs.html#1-353" title="goto source code">[src]</a></span><span class="in-band">Module <a href="../index.html">fe_parser</a>::<wbr><a class="mod" href="">builders</a></span></h1><div class="docblock"><p>Parser factory functions (builders).</p>
+<p>Much of the code in this module was inspired by the <a href="https://github.com/Geal/nom/">nom</a>
+library.  One or two particular parts of this module were copied more or
+less directly from <code>nom</code>.  Therefore, the <code>nom</code> license is included below
+and will apply where explicitly noted.  Otherwise, though the API of this
+module was directly taken from <code>nom</code>, the actual implementations of most
+parser builders are original, though they may coincide with the
+implementations of nom parser builders.</p>
+<pre><code class="language-text">&lt;&lt;&lt;&lt; BEGIN NOM LICENSE &gt;&gt;&gt;&gt;
+
+Copyright (c) 2014-2019 Geoffroy Couprie
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to
+deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+IN THE SOFTWARE.
+
+&lt;&lt;&lt;&lt; END NOM LICENSE &gt;&gt;&gt;&gt;
+</code></pre>
+<p>The above license applies to any component enclosed in a pair of comments as
+follows:</p>
+<pre><code class="language-text">// &lt;&lt;&lt; BEGIN NOM LICENSE COVERAGE &gt;&gt;&gt;
+
+...
+
+// &lt;&lt;&lt; END NOM LICENSE COVERAGE &gt;&gt;&gt;
+</code></pre>
+</div><h2 id="traits" class="section-header"><a href="#traits">Traits</a></h2>
+<table><tr class="module-item"><td><a class="trait" href="trait.Alt.html" title="fe_parser::builders::Alt trait">Alt</a></td><td class="docblock-short"></td></tr></table><h2 id="functions" class="section-header"><a href="#functions">Functions</a></h2>
+<table><tr class="module-item"><td><a class="fn" href="fn.alt.html" title="fe_parser::builders::alt fn">alt</a></td><td class="docblock-short"></td></tr><tr class="module-item"><td><a class="fn" href="fn.delimited.html" title="fe_parser::builders::delimited fn">delimited</a></td><td class="docblock-short"><p>Modify a parser to parse and discard left and right delimiters before and
+after the parsed content.  The parsed delimiters are used to determine the
+span of the parsing result.</p>
+</td></tr><tr class="module-item"><td><a class="fn" href="fn.many0.html" title="fe_parser::builders::many0 fn">many0</a></td><td class="docblock-short"></td></tr><tr class="module-item"><td><a class="fn" href="fn.many1.html" title="fe_parser::builders::many1 fn">many1</a></td><td class="docblock-short"></td></tr><tr class="module-item"><td><a class="fn" href="fn.map.html" title="fe_parser::builders::map fn">map</a></td><td class="docblock-short"></td></tr><tr class="module-item"><td><a class="fn" href="fn.op_expr_builder.html" title="fe_parser::builders::op_expr_builder fn">op_expr_builder</a></td><td class="docblock-short"></td></tr><tr class="module-item"><td><a class="fn" href="fn.opt.html" title="fe_parser::builders::opt fn">opt</a></td><td class="docblock-short"></td></tr><tr class="module-item"><td><a class="fn" href="fn.pair.html" title="fe_parser::builders::pair fn">pair</a></td><td class="docblock-short"></td></tr><tr class="module-item"><td><a class="fn" href="fn.preceded.html" title="fe_parser::builders::preceded fn">preceded</a></td><td class="docblock-short"></td></tr><tr class="module-item"><td><a class="fn" href="fn.separated.html" title="fe_parser::builders::separated fn">separated</a></td><td class="docblock-short"><p>Modify a parser to apply itself repeatedly while consuming separators
+(including an optional trailing separator).</p>
+</td></tr><tr class="module-item"><td><a class="fn" href="fn.terminated.html" title="fe_parser::builders::terminated fn">terminated</a></td><td class="docblock-short"></td></tr><tr class="module-item"><td><a class="fn" href="fn.verify.html" title="fe_parser::builders::verify fn">verify</a></td><td class="docblock-short"></td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "fe_parser";</script><script src="../../main.js"></script><script defer src="../../search-index.js"></script></body></html>

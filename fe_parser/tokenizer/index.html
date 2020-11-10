@@ -1,0 +1,38 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `tokenizer` mod in crate `fe_parser`."><meta name="keywords" content="rust, rustlang, rust-lang, tokenizer"><title>fe_parser::tokenizer - Rust</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="alternate icon" type="image/png" href="../../favicon-16x16.png">
+<link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../fe_parser/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a><p class="location">Module tokenizer</p><div class="sidebar-elems"><div class="block items"><ul><li><a href="#reexports">Re-exports</a></li><li><a href="#modules">Modules</a></li></ul></div><p class="location"><a href="../index.html">fe_parser</a></p><script>window.sidebarCurrent = {name: "tokenizer", ty: "mod", relpath: "../"};</script><script defer src="../sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../../src/fe_parser/tokenizer/mod.rs.html#1-50" title="goto source code">[src]</a></span><span class="in-band">Module <a href="../index.html">fe_parser</a>::<wbr><a class="mod" href="">tokenizer</a></span></h1><div class="docblock"><p>A Rust port of <a href="https://github.com/python/cpython/blob/2a58b0636d1f620f8a85a2e4c030cc10551936a5/Lib/tokenize.py">Python's std lib <code>tokenize</code>
+module</a>.</p>
+<h2 id="usage" class="section-header"><a href="#usage">Usage</a></h2>
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">fe_parser</span>::<span class="ident">tokenizer</span>::<span class="ident">tokenize</span>;
+
+<span class="kw">let</span> <span class="ident">source_string</span> <span class="op">=</span> <span class="string">r#&quot;
+class Foo:
+    bar = &quot;baz&quot;
+&quot;#</span>;
+<span class="kw">let</span> <span class="ident">token_vector</span> <span class="op">=</span> <span class="ident">tokenize</span>(<span class="ident">source_string</span>).<span class="ident">unwrap</span>();</pre></div>
+<h2 id="differencessimilarities-with-pythons-tokenize-module" class="section-header"><a href="#differencessimilarities-with-pythons-tokenize-module">Differences/similarities with python's <code>tokenize</code> module</a></h2>
+<ul>
+<li>The <a href="../../fe_parser/tokenizer/tokenize/fn.tokenize.html" title="self::tokenize::tokenize"><code>self::tokenize::tokenize</code></a> function generates all token types
+produced by python's <code>tokenize.tokenize</code> method <em>except</em> for an initial
+<code>ENCODING</code> token.  Source files are always assumed to be encoded in utf-8
+so this token is redundant.</li>
+<li>The <a href="../../fe_parser/tokenizer/types/struct.Token.html" title="self::types::Token"><code>self::types::Token</code></a> struct, which we use to represent parsed
+tokens, includes a single <code>span</code> field containing the byte offsets
+representing the beginning and exclusive end of the token in a source
+string. This differs from Python's <code>TokenInfo</code> instances which use
+line/column tuples to represent the beginning and ending positions of a
+token.</li>
+<li>The <a href="../../fe_parser/tokenizer/tokenize/fn.tokenize.html" title="self::tokenize::tokenize"><code>self::tokenize::tokenize</code></a> function has no streaming behavior and
+accepts a reference to an entire source string available in memory.
+Python's <code>tokenize.tokenize</code> function accepts a reference to a function
+that progressively yields lines of text from a source file.</li>
+</ul>
+<p>As Python's <code>tokenize</code> module's implementation is pretty ugly, so is the
+implementation of <a href="../../fe_parser/tokenizer/tokenize/fn.tokenize.html" title="self::tokenize::tokenize"><code>self::tokenize::tokenize</code></a>.  It may be a candidate for
+later cleanup.  However, it may also be fine as is assuming it doesn't need
+to be modified often.</p>
+</div><h2 id="reexports" class="section-header"><a href="#reexports">Re-exports</a></h2>
+<table><tr><td><code>pub use self::tokenize::<a class="fn" href="../../fe_parser/tokenizer/tokenize/fn.tokenize.html" title="fn fe_parser::tokenizer::tokenize::tokenize">tokenize</a>;</code></td></tr><tr><td><code>pub use self::tokenize::<a class="struct" href="../../fe_parser/tokenizer/tokenize/struct.TokenizeError.html" title="struct fe_parser::tokenizer::tokenize::TokenizeError">TokenizeError</a>;</code></td></tr><tr><td><code>pub use self::types::<a class="struct" href="../../fe_parser/tokenizer/types/struct.Token.html" title="struct fe_parser::tokenizer::types::Token">Token</a>;</code></td></tr><tr><td><code>pub use self::types::<a class="enum" href="../../fe_parser/tokenizer/types/enum.TokenType.html" title="enum fe_parser::tokenizer::types::TokenType">TokenType</a>;</code></td></tr></table><h2 id="modules" class="section-header"><a href="#modules">Modules</a></h2>
+<table><tr class="module-item"><td><a class="mod" href="tokenize/index.html" title="fe_parser::tokenizer::tokenize mod">tokenize</a></td><td class="docblock-short"></td></tr><tr class="module-item"><td><a class="mod" href="types/index.html" title="fe_parser::tokenizer::types mod">types</a></td><td class="docblock-short"></td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "fe_parser";</script><script src="../../main.js"></script><script defer src="../../search-index.js"></script></body></html>

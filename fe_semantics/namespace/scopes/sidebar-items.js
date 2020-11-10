@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["ContractDef",""],["FunctionDef",""],["ModuleDef",""],["Scope",""]],"struct":[["ContractScope",""],["FunctionScope",""],["ModuleScope",""]],"type":[["Shared",""]]});

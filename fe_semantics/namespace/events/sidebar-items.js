@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["event_topic","Formats the name and fields and calculates the 32 byte keccak256 value of the signature."]],"struct":[["Event",""]]});

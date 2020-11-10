@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Span","An exclusive span of byte offsets in a source file."],["Spanned",""]]});
