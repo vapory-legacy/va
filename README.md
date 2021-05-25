@@ -1,7 +1,7 @@
 
 <img src="https://raw.githubusercontent.com/ethereum/fe/master/logo/fe_svg/fe_source.svg" width="150px">
  
-Fe is an emerging smart contract language for the Vapory blockchain.
+Va is an emerging smart contract language for the Vapory blockchain.
 
 [![Build Status](https://github.com/ethereum/fe/workflows/CI/badge.svg)](https://github.com/ethereum/fe/actions)
 [![Coverage](https://codecov.io/gh/ethereum/fe/branch/master/graph/badge.svg)](https://codecov.io/gh/ethereum/fe)
